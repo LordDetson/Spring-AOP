@@ -4,10 +4,7 @@ import by.babanin.logger.EventLogger;
 import by.babanin.model.Client;
 import by.babanin.model.Event;
 import by.babanin.model.EventType;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.ConfigurableApplicationContext;
-import org.springframework.context.annotation.Configuration;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.stereotype.Component;
 
@@ -19,7 +16,6 @@ public class Runner {
     private EventLogger defaultLogger;
     private Map<EventType, EventLogger> loggers;
 
-    @Autowired
     public Runner(
             Client client,
             EventLogger defaultLogger,
@@ -53,7 +49,7 @@ public class Runner {
         ac.close();
     }
 
-    private void logEvent(EventType type, Event message) {
+    public void logEvent(EventType type, Event message) {
         EventLogger eventLogger;
         if (type == null) eventLogger = defaultLogger;
         else eventLogger = loggers.get(type);

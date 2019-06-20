@@ -24,7 +24,7 @@ public class AppConfig {
 
     @Bean
     @Scope("prototype")
-    Event event(@Autowired SimpleDateFormat simpleDateFormat) {
+    Event event(SimpleDateFormat simpleDateFormat) {
         return new Event(new Date(), simpleDateFormat);
     }
 
@@ -38,8 +38,8 @@ public class AppConfig {
 
     @Bean
     Map<EventType, EventLogger> loggerMap(
-            @Autowired EventLogger consoleLogger,
-            @Autowired EventLogger combinedLogger) {
+            EventLogger consoleLogger,
+            EventLogger combinedLogger) {
         Map<EventType, EventLogger> loggerMap = new HashMap<>();
         loggerMap.put(EventType.INFO, consoleLogger);
         loggerMap.put(EventType.ERROR, combinedLogger);
@@ -48,8 +48,8 @@ public class AppConfig {
 
     @Bean
     Collection<EventLogger> eventLoggers(
-            @Autowired EventLogger consoleLogger,
-            @Autowired EventLogger fileLogger
+            EventLogger consoleLogger,
+            EventLogger fileLogger
     ) {
         List<EventLogger> eventLoggers = new ArrayList<>();
         eventLoggers.add(fileLogger);
